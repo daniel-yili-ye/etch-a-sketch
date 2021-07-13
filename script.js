@@ -6,3 +6,9 @@ for (let i=1;i<=(16*16);i++) {
     grid.append(node)
 }
 
+function changeColor(e) {
+    (e.toElement).classList.add('paint')
+}
+
+const items = document.querySelectorAll("div[class='grid-item']")
+items.forEach(item => item.addEventListener("mouseover", changeColor))
