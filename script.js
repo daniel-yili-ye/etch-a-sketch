@@ -10,19 +10,18 @@ function makeGrid(x) {
 makeGrid(16)
 
 // hover over and change color
-function initialize() {
-    const items = document.querySelectorAll("div[class='grid-item']")
-    items.forEach(item => item.addEventListener("mouseover", (e) => {
-        e.toElement.classList.add('paint')
-    }))
+let items = document.querySelectorAll("div[class='grid-item']")
+function paintIn (e) {
+    e.toElement.classList.add('paint')
 }
-initialize()
+
+items.forEach(item => item.addEventListener("mouseover", paintIn))
 
 // clear button functionality
 function removeColor() {
     items.forEach(item => item.classList.remove('paint'))
 }
-const clear = document.querySelector('#clear')
+let clear = document.querySelector('#clear')
 clear.addEventListener('click', removeColor)
 
 // resize dimensions
@@ -36,7 +35,11 @@ function changeSize() {
         else {
             grid.textContent = ''
             makeGrid(dimension)
-            initialize()
+            grid.style.gridTemplateColumns = `repeat(${dimension}, auto)`
+            items = document.querySelectorAll("div[class='grid-item']")
+            items.forEach(item => item.addEventListener("mouseover", (e) => {
+                e.toElement.classList.add('paint')
+            }))
         }
     }
 }
@@ -45,3 +48,12 @@ size.addEventListener('click', changeSize)
 
 // grey scale
 const gray = document.querySelector('#gray')
+gray.addEventListener('click', makeGrayscale)
+function grayIn(e) {
+    e.toElement.classList.add('gray')
+}
+function makeGrayscale () {
+    items = document.querySelectorAll("div[class='grid-item']")
+    items.forEach(item => item.removeEventListener("mouseover", paintIn))
+    items.forEach(item => item.addEventListener("mouseover", grayIn))
+}
