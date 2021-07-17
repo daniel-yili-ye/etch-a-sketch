@@ -19,15 +19,5 @@ body, button {
 }
 
 .grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
     border: 0px solid black;
-}
-
-.black {
-    background-color: black;
-}
-
-.grey {
-    background-color: grey;
-    opacity: 0.1;
 }
