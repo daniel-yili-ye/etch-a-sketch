@@ -15,7 +15,7 @@ body, button {
     border: 1px solid black;
     width: 500px;
     height: 500px;
-    margin: auto;
+    margin: 25px auto;
 }
 
 .grid-item {
@@ -27,7 +27,7 @@ body, button {
     background-color: black;
 }
 
-.gray {
-    background-color: gray;
+.grey {
+    background-color: grey;
     opacity: 0.1;
 }

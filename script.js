@@ -1,18 +1,21 @@
+// initialize variables and grid
 let dimension = 16
 let option = 'black'
 let grid = document.querySelector("div[class='grid-container']")
 makeGrid(dimension)
-
 let items = document.querySelectorAll("div[class='grid-item']")
-items.forEach(item => item.addEventListener("mouseover", (e) => {
-    e.toElement.classList.add(option)
-}))
+items.forEach(item => item.addEventListener("mouseover", (e) => e.toElement.classList.add(option)))
 let clear = document.querySelector('#clear')
 let size = document.querySelector('#size')
-let gray = document.querySelector('#gray')
+let grey = document.querySelector('#grey')
 clear.addEventListener('click', clearColor)
 size.addEventListener('click', changeSize)
-gray.addEventListener('click', makeGrayscale)
+grey.addEventListener('click', makeGreyscale)
+
+function initialize() {
+    items = document.querySelectorAll("div[class='grid-item']")
+    items.forEach(item => item.addEventListener("mouseover", (e) => e.toElement.classList.add(option)))
+}
 
 // create grid x by x grid
 function makeGrid(x) {
@@ -23,20 +26,11 @@ function makeGrid(x) {
     }
 }
 
-// hover over and change color
-function blackIn (e) {
-    option = 'black'
-    e.toElement.classList.add(option)
-}
-
 // clear button functionality
 function clearColor() {
     grid.textContent = ''
     makeGrid(dimension)
-    items = document.querySelectorAll("div[class='grid-item']")
-    items.forEach(item => item.addEventListener("mouseover", (e) => {
-        e.toElement.classList.add(option)
-    }))
+    initialize()
 }
 
 // resize dimensions
@@ -51,24 +45,16 @@ function changeSize() {
             grid.textContent = ''
             makeGrid(dimension)
             grid.style.gridTemplateColumns = `repeat(${dimension}, auto)`
-            items = document.querySelectorAll("div[class='grid-item']")
-            items.forEach(item => item.addEventListener("mouseover", (e) => {
-                e.toElement.classList.add(option)
-            }))
+            initialize()
         }
     }
 }
 
-// grey scale
-function grayIn(e) {
-    option = 'gray'
-    e.toElement.classList.add(option)
-}
-
-// make gray
-function makeGrayscale () {
-    items = document.querySelectorAll("div[class='grid-item']")
-    items.forEach(item => item.removeEventListener("mouseover", blackIn))
-    items.forEach(item => item.addEventListener("mouseover", grayIn))
+// make greyscale
+function makeGreyscale () {
+    option = (option == 'black') ? 'grey' : 'black'
+    grey.textContent = (grey.textContent == 'Change to Greyscale') ? 'Change to Black' : 'Change to Greyscale'
+    items.forEach(item => item.replaceWith(item.cloneNode(true)))
+    initialize()
 }
 
